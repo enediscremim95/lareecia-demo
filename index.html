@@ -131,7 +131,16 @@
 
     /* TESTIMONIALS */
     .testimonials { background: var(--cream); }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-top: 3rem; }
+    .reviews-carousel { position: relative; display: flex; align-items: center; gap: .5rem; margin-top: 3rem; }
+    .rc-wrapper { overflow: hidden; flex: 1; }
+    .rc-track { display: flex; gap: 1.2rem; transition: transform .4s cubic-bezier(.4,0,.2,1); }
+    .testimonial-card { flex: 0 0 calc((100% - 2.4rem) / 3); min-width: 0; }
+    .rc-btn { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--green); background: #fff; color: var(--green); font-size: 1.6rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; line-height: 1; }
+    .rc-btn:hover { background: var(--green); color: #fff; }
+    .rc-btn:disabled { opacity: .3; cursor: default; pointer-events: none; }
+    .rc-dots { display: flex; justify-content: center; gap: .5rem; margin-top: 1.5rem; }
+    .rc-dot { width: 8px; height: 8px; border-radius: 4px; border: none; background: #ccc; cursor: pointer; padding: 0; transition: all .25s; }
+    .rc-dot.rc-dot--active { background: var(--green); width: 24px; }
     .testimonial-card { background: #fff; border-radius: 12px; padding: 1.4rem 1.4rem 1.2rem; box-shadow: 0 1px 8px rgba(0,0,0,.08); }
     .t-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .9rem; }
     .t-author { display: flex; align-items: center; gap: .75rem; }
@@ -221,7 +230,8 @@
       .stats { grid-template-columns: 1fr; }
       .stat-item:not(:last-child)::after { display: none; }
       .benefits-grid { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonial-card { flex: 0 0 calc((100% - 1.2rem) / 2); }
+      .rc-btn { width: 32px; height: 32px; font-size: 1.2rem; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-img img { height: 300px; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
@@ -450,7 +460,9 @@
     <h2 class="section-title" style="text-align:center">O que nossos clientes dizem</h2>
     <p class="section-sub" style="margin:0 auto;text-align:center">Mais de 500 famílias e empresas já transformaram seus ambientes com a Lar & Cia.</p>
   </div>
-  <div class="testimonials-grid">
+  <div class="reviews-carousel">
+    <button class="rc-btn rc-prev" aria-label="Anterior">&#8249;</button>
+    <div class="rc-wrapper"><div class="rc-track">
 
     <!-- Card 1 -->
     <div class="testimonial-card">
@@ -556,7 +568,10 @@
       <p class="t-text">Ótimo atendimento e negociação! Ficamos felizes com o nosso papel de parede.</p>
     </div>
 
+    </div></div>
+    <button class="rc-btn rc-next" aria-label="Próximo">&#8250;</button>
   </div>
+  <div class="rc-dots"></div>
 </section>
 
 <!-- CTA -->
@@ -757,6 +772,50 @@
     window.open('https://wa.me/' + loja + '?text=' + msg, '_blank');
     document.getElementById('wppBackdrop').classList.remove('open');
   }
+
+  // CARROSSEL DE DEPOIMENTOS
+  (function() {
+    const track = document.querySelector('.rc-track');
+    const dotsEl = document.querySelector('.rc-dots');
+    const prevBtn = document.querySelector('.rc-prev');
+    const nextBtn = document.querySelector('.rc-next');
+    if (!track) return;
+
+    const cards = Array.from(track.children);
+    const total = cards.length;
+    let current = 0;
+
+    function perView() {
+      return window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+    }
+
+    function maxIdx() { return Math.max(0, total - perView()); }
+
+    function update() {
+      const pv = perView();
+      const cardW = track.parentElement.offsetWidth;
+      const gap = 19.2;
+      const itemW = (cardW - gap * (pv - 1)) / pv;
+      current = Math.min(current, maxIdx());
+      track.style.transform = 'translateX(-' + (current * (itemW + gap)) + 'px)';
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current >= maxIdx();
+      document.querySelectorAll('.rc-dot').forEach((d, i) => d.classList.toggle('rc-dot--active', i === current));
+    }
+
+    // criar dots
+    for (let i = 0; i <= maxIdx(); i++) {
+      const d = document.createElement('button');
+      d.className = 'rc-dot' + (i === 0 ? ' rc-dot--active' : '');
+      d.addEventListener('click', function() { current = i; update(); });
+      dotsEl.appendChild(d);
+    }
+
+    prevBtn.addEventListener('click', function() { if (current > 0) { current--; update(); } });
+    nextBtn.addEventListener('click', function() { if (current < maxIdx()) { current++; update(); } });
+    window.addEventListener('resize', function() { update(); });
+    update();
+  })();
 </script>
 </body>
 </html>
