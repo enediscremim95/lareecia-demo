@@ -107,6 +107,8 @@
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
     .about-img { position: relative; border-radius: 12px; overflow: hidden; }
     .about-img img { width: 100%; height: 520px; object-fit: cover; border-radius: 12px; display: block; }
+    .about-logo-overlay { position: absolute; bottom: 1rem; left: 1rem; background: rgba(255,255,255,.92); border-radius: 8px; padding: .5rem .8rem; backdrop-filter: blur(4px); }
+    .about-logo-overlay img { height: 36px; display: block; }
     .about-img::after { content: 'Desde 2014'; position: absolute; bottom: -1px; right: -1px; background: var(--green); color: var(--gold-light); font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; padding: .9rem 1.4rem; border-radius: 12px 0 12px 0; }
     .about-list { list-style: none; margin: 1.8rem 0 2.2rem; display: flex; flex-direction: column; gap: .9rem; }
     .about-list li { display: flex; align-items: flex-start; gap: .8rem; font-size: .92rem; color: var(--text-muted); line-height: 1.5; }
@@ -403,7 +405,10 @@
 <section id="sobre">
   <div class="about-grid">
     <div class="about-img">
-      <img src="img/sobre.jpg" alt="Equipe Lar & Cia" loading="lazy">
+      <img src="img/sobre-foto.jpg" alt="Equipe Lar & Cia" loading="lazy">
+      <div class="about-logo-overlay">
+        <img src="img/logo-sem-fundo.png" alt="Lar & Cia">
+      </div>
     </div>
     <div class="about-content">
       <div class="section-label">Nossa história</div>
