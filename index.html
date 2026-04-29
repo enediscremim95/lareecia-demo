@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -14,6 +14,8 @@
       --gold-light: #c4a97e;
       --white: #FFFFFF;
       --cream: #F8F4EE;
+      --taupe: #9B8E7E;
+      --beige: #EDE8E0;
       --text: #1A1A1A;
       --text-muted: #6B6B6B;
       --whatsapp: #25D366;
@@ -24,24 +26,31 @@
     body { font-family: 'Inter', sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
     h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       padding: 0 5%; display: flex; align-items: center; justify-content: space-between;
-      height: 72px; transition: all .35s ease; background: transparent;
+      height: 72px; transition: all .35s ease;
+      background: linear-gradient(to bottom, rgba(0,0,0,.5) 0%, transparent 100%);
     }
-    nav.scrolled { background: rgba(28,58,34,.97); backdrop-filter: blur(8px); box-shadow: 0 2px 20px rgba(0,0,0,.25); }
+    nav.scrolled {
+      background: #fff;
+      box-shadow: 0 2px 20px rgba(0,0,0,.10);
+    }
+    nav.scrolled .nav-links a { color: var(--text); }
+    nav.scrolled .nav-links a:hover { color: var(--green); }
+    nav.scrolled .nav-phone { color: var(--text); }
     .nav-logo img { height: 48px; }
-    nav:not(.scrolled) { background: linear-gradient(to bottom, rgba(0,0,0,.45) 0%, transparent 100%); }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: rgba(255,255,255,.85); text-decoration: none; font-size: .85rem; font-weight: 500; letter-spacing: .04em; transition: color .2s; }
+    .nav-links a { color: rgba(255,255,255,.9); text-decoration: none; font-size: .85rem; font-weight: 500; letter-spacing: .04em; transition: color .2s; }
     .nav-links a:hover { color: var(--gold-light); }
     .nav-right { display: flex; align-items: center; gap: 1rem; }
-    .nav-phone { color: rgba(255,255,255,.85); font-size: .85rem; text-decoration: none; display: flex; align-items: center; gap: .4rem; }
-    .btn-nav { background: var(--gold); color: #fff; border: none; padding: .55rem 1.3rem; border-radius: 4px; font-size: .8rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background .2s; }
-    .btn-nav:hover { background: var(--gold-light); }
+    .nav-phone { color: rgba(255,255,255,.9); font-size: .85rem; text-decoration: none; display: flex; align-items: center; gap: .4rem; transition: color .2s; }
+    .btn-nav { background: var(--green); color: #fff; border: none; padding: .55rem 1.3rem; border-radius: 4px; font-size: .8rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background .2s; }
+    .btn-nav:hover { background: var(--green-light); }
+    nav.scrolled .btn-nav { background: var(--green); }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; overflow: hidden; }
     .hero-slider { position: absolute; inset: 0; }
     .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease; }
@@ -49,12 +58,12 @@
     .hero-slide:nth-child(1) { background-image: url('img/hero-1.jpg'); }
     .hero-slide:nth-child(2) { background-image: url('img/hero-2.jpg'); }
     .hero-slide:nth-child(3) { background-image: url('img/hero-3.jpg'); }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(15,28,18,.82) 0%, rgba(15,28,18,.55) 55%, rgba(15,28,18,.2) 100%); }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(15,28,18,.80) 0%, rgba(15,28,18,.50) 55%, rgba(15,28,18,.15) 100%); }
     .hero-content { position: relative; z-index: 2; padding: 0 5%; max-width: 680px; }
-    .hero-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(155,127,90,.25); border: 1px solid rgba(155,127,90,.5); color: var(--gold-light); padding: .35rem .9rem; border-radius: 100px; font-size: .75rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(155,127,90,.22); border: 1px solid rgba(155,127,90,.5); color: var(--gold-light); padding: .35rem .9rem; border-radius: 100px; font-size: .75rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1.5rem; }
     .hero h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); color: #fff; line-height: 1.12; margin-bottom: 1.2rem; }
     .hero h1 em { font-style: normal; color: var(--gold-light); }
-    .hero p { color: rgba(255,255,255,.82); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2.2rem; max-width: 520px; }
+    .hero p { color: rgba(255,255,255,.85); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2.2rem; max-width: 520px; }
     .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn-primary { display: inline-flex; align-items: center; gap: .6rem; background: var(--whatsapp); color: #fff; text-decoration: none; padding: .9rem 1.8rem; border-radius: 6px; font-weight: 600; font-size: .9rem; letter-spacing: .02em; transition: all .2s; box-shadow: 0 4px 20px rgba(37,211,102,.35); cursor: pointer; }
     .btn-primary:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(37,211,102,.45); }
@@ -64,59 +73,70 @@
     .hero-dot { width: 28px; height: 3px; background: rgba(255,255,255,.35); border-radius: 2px; cursor: pointer; transition: all .3s; }
     .hero-dot.active { background: var(--gold-light); width: 44px; }
 
-    /* STATS */
-    .stats { background: var(--green); padding: 2.5rem 5%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
+    /* ── STATS ── */
+    .stats { background: #fff; padding: 3rem 5%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border-bottom: 1px solid #eee; }
     .stat-item { text-align: center; padding: 1.5rem; position: relative; }
-    .stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 25%; bottom: 25%; width: 1px; background: rgba(255,255,255,.15); }
-    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: var(--gold-light); line-height: 1; }
-    .stat-suffix { font-size: 1.6rem; color: var(--gold-light); }
-    .stat-label { color: rgba(255,255,255,.75); font-size: .82rem; letter-spacing: .04em; margin-top: .4rem; text-transform: uppercase; }
+    .stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 1px; background: #e0dbd5; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 700; color: var(--green); line-height: 1; }
+    .stat-suffix { font-size: 1.8rem; color: var(--green); }
+    .stat-label { color: var(--text-muted); font-size: .82rem; letter-spacing: .04em; margin-top: .5rem; text-transform: uppercase; }
 
-    /* SECTIONS */
+    /* ── SECTIONS ── */
     section { padding: 6rem 5%; }
     .section-label { font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
-    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.2; margin-bottom: 1rem; }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.2; margin-bottom: 1rem; color: var(--text); }
     .section-sub { color: var(--text-muted); font-size: 1rem; line-height: 1.7; max-width: 560px; }
 
-    /* BENEFITS */
+    /* ── BENEFITS ── */
+    .benefits { background: #fff; }
     .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
-    .benefit-card { background: var(--cream); border-radius: 12px; padding: 2.2rem; position: relative; overflow: hidden; transition: transform .25s, box-shadow .25s; }
-    .benefit-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.1); }
-    .benefit-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green), var(--gold)); }
+    .benefit-card { background: var(--beige); border-radius: 12px; padding: 2.2rem; position: relative; overflow: hidden; transition: transform .25s, box-shadow .25s; }
+    .benefit-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.09); }
+    .benefit-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
     .benefit-icon { width: 52px; height: 52px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.4rem; }
     .benefit-icon svg { width: 24px; height: 24px; fill: none; stroke: var(--gold-light); stroke-width: 1.8; }
     .benefit-card h3 { font-size: 1.2rem; margin-bottom: .7rem; color: var(--green); }
     .benefit-card p { color: var(--text-muted); font-size: .9rem; line-height: 1.65; }
 
-    /* PRODUCTS */
+    /* ── TRUST BAND ── */
+    .trust-band { background: #fff; padding: 0 5% 5rem; }
+    .trust-inner { background: var(--cream); border-radius: 16px; padding: 3rem; display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+    .trust-icon-wrap { flex-shrink: 0; width: 64px; height: 64px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .trust-icon-wrap svg { width: 30px; height: 30px; stroke: var(--gold-light); fill: none; stroke-width: 1.6; }
+    .trust-content { flex: 1; min-width: 220px; }
+    .trust-content h3 { font-size: 1.5rem; color: var(--green); margin-bottom: .5rem; }
+    .trust-content p { color: var(--text-muted); font-size: .95rem; line-height: 1.6; }
+    .trust-divider { width: 1px; height: 60px; background: #ddd; flex-shrink: 0; }
+
+    /* ── PRODUCTS ── */
     .products { background: var(--cream); }
     .products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
     .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
     .product-card { position: relative; border-radius: 10px; overflow: hidden; aspect-ratio: 3/4; cursor: pointer; background: #e0d8cf; }
-    .product-card:first-child, .product-card:nth-child(6) { grid-column: span 2; aspect-ratio: auto; min-height: 280px; }
+    .product-card:first-child { grid-column: span 2; aspect-ratio: auto; min-height: 300px; }
     .product-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
     .product-card:hover img { transform: scale(1.06); }
-    .product-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(15,28,18,.85) 0%, rgba(15,28,18,.1) 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; opacity: 0; transition: opacity .3s; }
+    .product-name-bar { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem 1.2rem; background: linear-gradient(0deg, rgba(15,28,18,.85) 0%, transparent 100%); }
+    .product-name { color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; }
+    .product-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(15,28,18,.88) 0%, rgba(15,28,18,.1) 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; opacity: 0; transition: opacity .3s; }
     .product-card:hover .product-overlay { opacity: 1; }
-    .product-name-bar { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem 1.2rem; background: linear-gradient(0deg, rgba(15,28,18,.8) 0%, transparent 100%); }
-    .product-name { color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; }
     .product-cta { display: inline-flex; align-items: center; gap: .4rem; background: var(--gold); color: #fff; text-decoration: none; padding: .55rem 1rem; border-radius: 4px; font-size: .8rem; font-weight: 600; margin-top: .6rem; width: fit-content; transition: background .2s; cursor: pointer; }
     .product-cta:hover { background: var(--gold-light); }
-
-    /* ABOUT */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-    .about-img { position: relative; border-radius: 12px; overflow: hidden; background: var(--green); display: flex; align-items: center; justify-content: center; min-height: 520px; }
-    .about-img img { width: 80%; max-width: 360px; height: auto; object-fit: contain; display: block; padding: 3rem 2rem; }
-    .about-logo-overlay { position: absolute; bottom: 1rem; left: 1rem; background: rgba(255,255,255,.92); border-radius: 8px; padding: .5rem .8rem; backdrop-filter: blur(4px); }
-    .about-logo-overlay img { height: 36px; display: block; }
-    .about-img::after { content: 'Desde 2014'; position: absolute; bottom: -1px; right: -1px; background: var(--green); color: var(--gold-light); font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; padding: .9rem 1.4rem; border-radius: 12px 0 12px 0; }
-    .about-list { list-style: none; margin: 1.8rem 0 2.2rem; display: flex; flex-direction: column; gap: .9rem; }
-    .about-list li { display: flex; align-items: flex-start; gap: .8rem; font-size: .92rem; color: var(--text-muted); line-height: 1.5; }
-    .about-list li::before { content: ''; min-width: 18px; height: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%231C3A22'%3E%3Cpath fill-rule='evenodd' d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z' clip-rule='evenodd'/%3E%3C/svg%3E") center/contain no-repeat; margin-top: 1px; }
     .btn-green { display: inline-flex; align-items: center; gap: .6rem; background: var(--green); color: #fff; text-decoration: none; padding: .9rem 1.8rem; border-radius: 6px; font-weight: 600; font-size: .9rem; transition: all .2s; cursor: pointer; }
     .btn-green:hover { background: var(--green-light); transform: translateY(-2px); }
 
-    /* GALLERY */
+    /* ── ABOUT ── */
+    .about { background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-content { order: -1; }
+    .about-img { position: relative; border-radius: 12px; overflow: hidden; min-height: 520px; }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .about-badge { position: absolute; bottom: 1.5rem; right: 1.5rem; background: var(--green); color: var(--gold-light); font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; padding: .9rem 1.4rem; border-radius: 8px; }
+    .about-list { list-style: none; margin: 1.8rem 0 2.2rem; display: flex; flex-direction: column; gap: .9rem; }
+    .about-list li { display: flex; align-items: flex-start; gap: .8rem; font-size: .92rem; color: var(--text-muted); line-height: 1.5; }
+    .about-list li::before { content: ''; min-width: 18px; height: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%231C3A22'%3E%3Cpath fill-rule='evenodd' d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z' clip-rule='evenodd'/%3E%3C/svg%3E") center/contain no-repeat; margin-top: 1px; }
+
+    /* ── GALLERY ── */
     .gallery { background: var(--green); }
     .gallery .section-title { color: #fff; }
     .gallery .section-label { color: var(--gold-light); }
@@ -126,37 +146,11 @@
     .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
     .gallery-item:nth-child(4) { grid-column: span 2; }
     .gallery-item img { width: 100%; height: 100%; min-height: 200px; object-fit: cover; display: block; transition: transform .5s ease, filter .3s; }
-    .gallery-item:hover img { transform: scale(1.05); filter: brightness(1.1); }
+    .gallery-item:hover img { transform: scale(1.05); filter: brightness(1.08); }
 
-    /* TESTIMONIALS */
-    .testimonials { background: var(--cream); }
-    .reviews-carousel { position: relative; display: flex; align-items: center; gap: .5rem; margin-top: 3rem; }
-    .rc-wrapper { overflow: hidden; flex: 1; }
-    .rc-track { display: flex; gap: 1.2rem; transition: transform .4s cubic-bezier(.4,0,.2,1); }
-    .testimonial-card { flex: 0 0 calc((100% - 2.4rem) / 3); min-width: 0; }
-    .rc-btn { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--green); background: #fff; color: var(--green); font-size: 1.6rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; line-height: 1; }
-    .rc-btn:hover { background: var(--green); color: #fff; }
-    .rc-btn:disabled { opacity: .3; cursor: default; pointer-events: none; }
-    .rc-dots { display: flex; justify-content: center; gap: .5rem; margin-top: 1.5rem; }
-    .rc-dot { width: 8px; height: 8px; border-radius: 4px; border: none; background: #ccc; cursor: pointer; padding: 0; transition: all .25s; }
-    .rc-dot.rc-dot--active { background: var(--green); width: 24px; }
-    .testimonial-card { background: #fff; border-radius: 12px; padding: 1.4rem 1.4rem 1.2rem; box-shadow: 0 1px 8px rgba(0,0,0,.08); }
-    .t-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .9rem; }
-    .t-author { display: flex; align-items: center; gap: .75rem; }
-    .t-avatar { width: 42px; height: 42px; border-radius: 50%; background: #c5c5c5; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
-    .t-avatar svg { width: 26px; height: 26px; fill: #fff; }
-    .t-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-    .t-name { font-size: .88rem; font-weight: 700; color: #1a1a1a; font-family: 'Inter', sans-serif; }
-    .t-time { font-size: .75rem; color: #888; margin-top: 1px; }
-    .t-stars { display: flex; align-items: center; gap: .3rem; margin-bottom: .6rem; }
-    .t-stars span { color: #FBBC04; font-size: 1rem; letter-spacing: .05em; }
-    .t-check { width: 16px; height: 16px; }
-    .t-text { color: #444; font-size: .875rem; line-height: 1.6; }
-    /* Google G multicolor SVG icon inline */
-
-    /* CTA SECTION */
+    /* ── CTA SECTION ── */
     .cta-section { background: var(--green); text-align: center; padding: 6rem 5%; position: relative; overflow: hidden; }
-    .cta-section::before { content: ''; position: absolute; inset: 0; background: url('img/persianas.jpg') center/cover no-repeat; opacity: .12; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: url('img/persianas.jpg') center/cover no-repeat; opacity: .1; }
     .cta-section > * { position: relative; z-index: 1; }
     .cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); color: #fff; margin-bottom: 1rem; }
     .cta-section p { color: rgba(255,255,255,.75); font-size: 1.05rem; max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
@@ -166,15 +160,42 @@
     .btn-phone { display: inline-flex; align-items: center; gap: .7rem; background: transparent; color: #fff; text-decoration: none; padding: 1rem 2.2rem; border-radius: 6px; font-weight: 500; font-size: 1rem; border: 1.5px solid rgba(255,255,255,.45); transition: all .2s; }
     .btn-phone:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.8); }
 
-    /* LOCATIONS */
-    .locations { background: var(--cream); padding: 4rem 5%; }
-    .locations-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 720px; margin: 2rem auto 0; }
-    .location-card { background: #fff; border-radius: 10px; padding: 1.8rem; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
-    .location-card h3 { color: var(--green); font-size: 1.1rem; margin-bottom: 1rem; }
-    .location-detail { display: flex; align-items: flex-start; gap: .6rem; margin-bottom: .6rem; font-size: .88rem; color: var(--text-muted); }
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--cream); }
+    .testimonials .section-title { text-align: center; }
+    .testimonials .section-label { text-align: center; }
+    .testimonials .section-sub { margin: 0 auto; text-align: center; }
+    .reviews-carousel { position: relative; display: flex; align-items: center; gap: .5rem; margin-top: 3rem; }
+    .rc-wrapper { overflow: hidden; flex: 1; }
+    .rc-track { display: flex; gap: 1.2rem; transition: transform .4s cubic-bezier(.4,0,.2,1); }
+    .rc-btn { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--green); background: #fff; color: var(--green); font-size: 1.6rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; line-height: 1; }
+    .rc-btn:hover { background: var(--green); color: #fff; }
+    .rc-btn:disabled { opacity: .3; cursor: default; pointer-events: none; }
+    .rc-dots { display: flex; justify-content: center; gap: .5rem; margin-top: 1.5rem; }
+    .rc-dot { width: 8px; height: 8px; border-radius: 4px; border: none; background: #ccc; cursor: pointer; padding: 0; transition: all .25s; }
+    .rc-dot.rc-dot--active { background: var(--green); width: 24px; }
+    .testimonial-card { flex: 0 0 calc((100% - 2.4rem) / 3); min-width: 0; background: #fff; border-radius: 12px; padding: 1.4rem 1.4rem 1.2rem; box-shadow: 0 1px 8px rgba(0,0,0,.08); }
+    .t-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .9rem; }
+    .t-author { display: flex; align-items: center; gap: .75rem; }
+    .t-avatar { width: 42px; height: 42px; border-radius: 50%; background: #c5c5c5; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+    .t-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .t-name { font-size: .88rem; font-weight: 700; color: #1a1a1a; font-family: 'Inter', sans-serif; }
+    .t-time { font-size: .75rem; color: #888; margin-top: 1px; }
+    .t-stars { display: flex; align-items: center; gap: .3rem; margin-bottom: .6rem; }
+    .t-stars span { color: #FBBC04; font-size: 1rem; letter-spacing: .05em; }
+    .t-check { width: 16px; height: 16px; }
+    .t-text { color: #444; font-size: .875rem; line-height: 1.6; }
+
+    /* ── LOCATIONS ── */
+    .locations { background: #fff; padding: 5rem 5%; }
+    .locations-header { text-align: center; margin-bottom: 3rem; }
+    .locations-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 760px; margin: 0 auto; }
+    .location-card { background: var(--cream); border-radius: 12px; padding: 2rem; border: 1px solid #e5e0d8; }
+    .location-card h3 { color: var(--green); font-size: 1.2rem; margin-bottom: 1.2rem; border-bottom: 2px solid var(--gold); padding-bottom: .7rem; }
+    .location-detail { display: flex; align-items: flex-start; gap: .6rem; margin-bottom: .7rem; font-size: .88rem; color: var(--text-muted); }
     .location-detail svg { flex-shrink: 0; width: 16px; height: 16px; stroke: var(--green); fill: none; stroke-width: 2; margin-top: 1px; }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer { background: #0B2211; color: rgba(255,255,255,.65); padding: 3.5rem 5% 2rem; }
     .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 2rem; }
     .footer-logo img { height: 44px; margin-bottom: 1rem; }
@@ -191,13 +212,13 @@
     .footer-contact-item svg { width: 14px; height: 14px; fill: none; stroke: var(--gold-light); stroke-width: 2; flex-shrink: 0; }
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; color: rgba(255,255,255,.35); }
 
-    /* FLOAT WPP */
+    /* ── FLOAT WPP ── */
     .whatsapp-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; width: 58px; height: 58px; background: var(--whatsapp); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none; transition: all .25s; animation: pulse 2.5s infinite; cursor: pointer; }
     .whatsapp-float:hover { transform: scale(1.1); animation: none; }
     .whatsapp-float svg { width: 28px; height: 28px; fill: #fff; }
     @keyframes pulse { 0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.5); } 50% { box-shadow: 0 4px 30px rgba(37,211,102,.75), 0 0 0 8px rgba(37,211,102,.12); } }
 
-    /* MODAL WPP */
+    /* ── MODAL WPP ── */
     .wpp-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 2000; align-items: center; justify-content: center; padding: 1rem; }
     .wpp-backdrop.open { display: flex; }
     .wpp-modal { background: #f0ede8; border-radius: 12px; width: 100%; max-width: 380px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.35); animation: modalIn .25s ease; }
@@ -217,11 +238,13 @@
     .wpp-btn-cancel:hover { background: #999; }
     .wpp-note { font-size: .72rem; color: #888; text-align: center; margin-top: .7rem; }
 
-    /* RESPONSIVE */
+    /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .product-card:first-child, .product-card:nth-child(6) { grid-column: span 1; }
+      .product-card:first-child { grid-column: span 1; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .trust-inner { gap: 1.5rem; }
+      .trust-divider { display: none; }
     }
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -231,7 +254,8 @@
       .testimonial-card { flex: 0 0 calc((100% - 1.2rem) / 2); }
       .rc-btn { width: 36px; height: 36px; font-size: 1.3rem; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .about-img img { height: 300px; }
+      .about-content { order: 0; }
+      .about-img { min-height: 320px; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
       .gallery-item:nth-child(1) { grid-column: span 2; }
       .gallery-item:nth-child(4) { grid-column: span 1; }
@@ -302,15 +326,15 @@
   </div>
 </section>
 
-<!-- STATS -->
+<!-- STATS — fundo branco -->
 <div class="stats" id="stats">
-  <div class="stat-item">
-    <div class="stat-num"><span class="counter" data-target="10">0</span><span class="stat-suffix">+</span></div>
-    <div class="stat-label">Anos de experiência</div>
-  </div>
   <div class="stat-item">
     <div class="stat-num"><span class="counter" data-target="500">0</span><span class="stat-suffix">+</span></div>
     <div class="stat-label">Projetos realizados</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num"><span class="counter" data-target="10">0</span><span class="stat-suffix">+</span></div>
+    <div class="stat-label">Anos de experiência</div>
   </div>
   <div class="stat-item">
     <div class="stat-num"><span class="counter" data-target="98">0</span><span class="stat-suffix">%</span></div>
@@ -318,8 +342,8 @@
   </div>
 </div>
 
-<!-- BENEFITS -->
-<section id="diferenciais">
+<!-- BENEFÍCIOS — cards bege/taupê -->
+<section class="benefits" id="diferenciais">
   <div class="section-label">Por que nos escolher</div>
   <h2 class="section-title">Experiências sob medida em<br>cortinas, persianas e muito mais</h2>
   <p class="section-sub">Da visita ao seu lar até a instalação final, cuidamos de cada detalhe para que você tenha uma experiência tranquila e resultado impecável.</p>
@@ -348,12 +372,41 @@
   </div>
 </section>
 
-<!-- PRODUCTS -->
+<!-- CONFIANÇA E SEGURANÇA — fundo branco -->
+<div class="trust-band">
+  <div class="trust-inner">
+    <div class="trust-icon-wrap">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="trust-content">
+      <h3>Confiança e segurança</h3>
+      <p>Trabalhamos com os melhores tecidos e materiais, garantindo acabamento perfeito e durabilidade para o seu investimento. Todos os nossos produtos têm garantia e suporte pós-instalação.</p>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-icon-wrap">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+    <div class="trust-content">
+      <h3>Atendimento ágil</h3>
+      <p>Da consulta à instalação, nossa equipe especializada cumpre prazos e supera expectativas. Mais de 500 famílias e empresas já confiam na Lar & Cia.</p>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-icon-wrap">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </div>
+    <div class="trust-content">
+      <h3>Satisfação garantida</h3>
+      <p>98% dos nossos clientes recomendam a Lar & Cia. O seu resultado impecável é nossa prioridade desde o primeiro contato até o acabamento final.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUTOS -->
 <section class="products" id="produtos">
   <div class="products-header">
     <div>
       <div class="section-label">Nossos produtos</div>
-      <h2 class="section-title">Soluções para todos<br>os ambientes</h2>
+      <h2 class="section-title">Nossas soluções<br>em decoração</h2>
     </div>
     <a href="#" onclick="openWppModal();return false;" class="btn-green">Ver todos os produtos</a>
   </div>
@@ -362,7 +415,7 @@
       <img src="img/cortinas.jpg" alt="Cortinas" loading="lazy">
       <div class="product-name-bar"><div class="product-name">Cortinas</div></div>
       <div class="product-overlay">
-        <p style="color:rgba(255,255,255,.8);font-size:.82rem;margin-bottom:.6rem">Elegância e funcionalidade sob medida para seu ambiente.</p>
+        <p style="color:rgba(255,255,255,.82);font-size:.82rem;margin-bottom:.6rem">Elegância e funcionalidade sob medida para seu ambiente.</p>
         <a href="#" onclick="openWppModal();return false;" class="product-cta">Solicitar orçamento →</a>
       </div>
     </div>
@@ -370,7 +423,7 @@
       <img src="img/persianas.jpg" alt="Persianas" loading="lazy">
       <div class="product-name-bar"><div class="product-name">Persianas</div></div>
       <div class="product-overlay">
-        <p style="color:rgba(255,255,255,.8);font-size:.82rem;margin-bottom:.6rem">Controle de luz e privacidade com design moderno.</p>
+        <p style="color:rgba(255,255,255,.82);font-size:.82rem;margin-bottom:.6rem">Controle de luz e privacidade com design moderno.</p>
         <a href="#" onclick="openWppModal();return false;" class="product-cta">Solicitar orçamento →</a>
       </div>
     </div>
@@ -378,7 +431,7 @@
       <img src="img/papel-parede.jpg" alt="Papel de Parede" loading="lazy">
       <div class="product-name-bar"><div class="product-name">Papel de Parede</div></div>
       <div class="product-overlay">
-        <p style="color:rgba(255,255,255,.8);font-size:.82rem;margin-bottom:.6rem">Transforme qualquer parede em um destaque do ambiente.</p>
+        <p style="color:rgba(255,255,255,.82);font-size:.82rem;margin-bottom:.6rem">Transforme qualquer parede em destaque do ambiente.</p>
         <a href="#" onclick="openWppModal();return false;" class="product-cta">Solicitar orçamento →</a>
       </div>
     </div>
@@ -386,7 +439,7 @@
       <img src="img/sanca.jpg" alt="Sanca de Isopor" loading="lazy">
       <div class="product-name-bar"><div class="product-name">Sanca de Isopor</div></div>
       <div class="product-overlay">
-        <p style="color:rgba(255,255,255,.8);font-size:.82rem;margin-bottom:.6rem">Acabamento sofisticado para tetos e ambientes de alto padrão.</p>
+        <p style="color:rgba(255,255,255,.82);font-size:.82rem;margin-bottom:.6rem">Acabamento sofisticado para tetos de alto padrão.</p>
         <a href="#" onclick="openWppModal();return false;" class="product-cta">Solicitar orçamento →</a>
       </div>
     </div>
@@ -394,7 +447,7 @@
       <img src="img/rodape.jpg" alt="Rodapé" loading="lazy">
       <div class="product-name-bar"><div class="product-name">Rodapé</div></div>
       <div class="product-overlay">
-        <p style="color:rgba(255,255,255,.8);font-size:.82rem;margin-bottom:.6rem">O detalhe que faz a diferença no acabamento do seu espaço.</p>
+        <p style="color:rgba(255,255,255,.82);font-size:.82rem;margin-bottom:.6rem">O detalhe que faz a diferença no acabamento do seu espaço.</p>
         <a href="#" onclick="openWppModal();return false;" class="product-cta">Solicitar orçamento →</a>
       </div>
     </div>
@@ -402,7 +455,7 @@
       <img src="img/painel.jpg" alt="Painel Personalizado" loading="lazy">
       <div class="product-name-bar"><div class="product-name">Painel Personalizado</div></div>
       <div class="product-overlay">
-        <p style="color:rgba(255,255,255,.8);font-size:.82rem;margin-bottom:.6rem">Painéis exclusivos que expressam sua personalidade.</p>
+        <p style="color:rgba(255,255,255,.82);font-size:.82rem;margin-bottom:.6rem">Painéis exclusivos que expressam sua personalidade.</p>
         <a href="#" onclick="openWppModal();return false;" class="product-cta">Solicitar orçamento →</a>
       </div>
     </div>
@@ -410,23 +463,20 @@
       <img src="img/boiserie.jpg" alt="Boiserie" loading="lazy">
       <div class="product-name-bar"><div class="product-name">Boiserie</div></div>
       <div class="product-overlay">
-        <p style="color:rgba(255,255,255,.8);font-size:.82rem;margin-bottom:.6rem">Revestimento clássico que eleva o requinte de qualquer ambiente.</p>
+        <p style="color:rgba(255,255,255,.82);font-size:.82rem;margin-bottom:.6rem">Revestimento clássico que eleva o requinte de qualquer ambiente.</p>
         <a href="#" onclick="openWppModal();return false;" class="product-cta">Solicitar orçamento →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="sobre">
+<!-- SOBRE — texto esquerda + foto direita (sobre.jpg) -->
+<section class="about" id="sobre">
   <div class="about-grid">
-    <div class="about-img">
-      <img src="img/logo-sem-fundo.png" alt="Lar & Cia">
-    </div>
     <div class="about-content">
       <div class="section-label">Nossa história</div>
-      <h2 class="section-title">Mais do que decorar,<br>criamos ambientes que inspiram</h2>
-      <p class="section-sub">Na Lar & Cia, cada projeto vai além da estética. Nosso propósito é unir funcionalidade, beleza e bem-estar, transformando casas e empresas em espaços únicos.</p>
+      <h2 class="section-title">Mais do que decorar,<br>criamos ambientes que inspiram e acolhem</h2>
+      <p class="section-sub">Na Lar & Cia, cada projeto vai além da estética. Nosso propósito é unir funcionalidade, beleza e bem-estar, transformando casas e empresas em espaços únicos que refletem quem você é.</p>
       <ul class="about-list">
         <li>Atendimento personalizado com visita ao seu ambiente</li>
         <li>Produtos sob medida com os melhores tecidos e materiais</li>
@@ -434,34 +484,52 @@
         <li>Duas lojas em Curitiba e Pinhais para melhor atendê-lo</li>
         <li>Garantia de satisfação e suporte pós-instalação</li>
       </ul>
-      <a href="#contato" class="btn-green">Conheça nossas lojas →</a>
+      <a href="#" onclick="openWppModal();return false;" class="btn-green">Solicitar orçamento grátis →</a>
+    </div>
+    <div class="about-img">
+      <img src="img/sobre.jpg" alt="Lar & Cia — Nosso espaço">
+      <div class="about-badge">Desde 2014</div>
     </div>
   </div>
 </section>
 
-<!-- GALLERY -->
+<!-- GALERIA -->
 <section class="gallery" id="galeria">
   <div class="section-label">Nossos projetos</div>
-  <h2 class="section-title">Ambientes transformados<br>pela Lar & Cia</h2>
+  <h2 class="section-title">Nossos projetos em destaque</h2>
   <p class="section-sub">Confira alguns dos projetos realizados pela nossa equipe em residências e empresas de Curitiba e região.</p>
   <div class="gallery-grid">
-    <div class="gallery-item"><img src="img/hero-1.jpg" alt="Projeto" loading="lazy"></div>
+    <div class="gallery-item"><img src="img/galeria-1.jpg" alt="Projeto" loading="lazy"></div>
     <div class="gallery-item"><img src="img/galeria-2.jpg" alt="Projeto" loading="lazy"></div>
     <div class="gallery-item"><img src="img/galeria-3.jpg" alt="Projeto" loading="lazy"></div>
     <div class="gallery-item"><img src="img/galeria-4.jpg" alt="Projeto" loading="lazy"></div>
     <div class="gallery-item"><img src="img/galeria-5.jpg" alt="Projeto" loading="lazy"></div>
     <div class="gallery-item"><img src="img/galeria-6.jpg" alt="Projeto" loading="lazy"></div>
-    <div class="gallery-item"><img src="img/hero-2.jpg" alt="Projeto" loading="lazy"></div>
+    <div class="gallery-item"><img src="img/galeria-7.jpg" alt="Projeto" loading="lazy"></div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div style="text-align:center">
-    <div class="section-label" style="text-align:center">Depoimentos</div>
-    <h2 class="section-title" style="text-align:center">O que nossos clientes dizem</h2>
-    <p class="section-sub" style="margin:0 auto;text-align:center">Mais de 500 famílias e empresas já transformaram seus ambientes com a Lar & Cia.</p>
+<!-- CTA -->
+<section class="cta-section" id="contato">
+  <h2>Transforme seu ambiente<br><em style="color:var(--gold-light);font-style:normal">hoje mesmo</em></h2>
+  <p>Solicite um orçamento gratuito em apenas 10 minutos. Nossa equipe vai até você, mede e apresenta as opções ideais para o seu espaço.</p>
+  <div class="cta-btn-group">
+    <a href="#" onclick="openWppModal();return false;" class="btn-whatsapp">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Solicitar orçamento via WhatsApp
+    </a>
+    <a href="tel:+554130560490" class="btn-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.46 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012.38 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      (41) 3056-0490
+    </a>
   </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="testimonials">
+  <div class="section-label">Depoimentos</div>
+  <h2 class="section-title">O que nossos clientes dizem</h2>
+  <p class="section-sub">Mais de 500 famílias e empresas já transformaram seus ambientes com a Lar & Cia.</p>
   <div class="reviews-carousel">
     <button class="rc-btn rc-prev" aria-label="Anterior">&#8249;</button>
     <div class="rc-wrapper"><div class="rc-track">
@@ -576,27 +644,12 @@
   <div class="rc-dots"></div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section" id="contato">
-  <h2>Transforme seu ambiente<br><em style="color:var(--gold-light);font-style:normal">hoje mesmo</em></h2>
-  <p>Solicite um orçamento gratuito em apenas 10 minutos. Nossa equipe vai até você, mede e apresenta as opções ideais para o seu espaço.</p>
-  <div class="cta-btn-group">
-    <a href="#" onclick="openWppModal();return false;" class="btn-whatsapp">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Solicitar orçamento via WhatsApp
-    </a>
-    <a href="tel:+554130560490" class="btn-phone">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.46 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012.38 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-      (41) 3056-0490
-    </a>
-  </div>
-</section>
-
-<!-- LOCATIONS -->
+<!-- LOCALIZAÇÃO -->
 <section class="locations">
-  <div style="text-align:center">
+  <div class="locations-header">
     <div class="section-label" style="text-align:center">Nossas lojas</div>
     <h2 class="section-title" style="text-align:center">Visite-nos pessoalmente</h2>
+    <p class="section-sub" style="margin:0 auto;text-align:center">Duas lojas para melhor atendê-lo em Curitiba e região.</p>
   </div>
   <div class="locations-grid">
     <div class="location-card">
@@ -715,11 +768,11 @@
 
 <!-- FLOAT WPP -->
 <a href="#" onclick="openWppModal();return false;" class="whatsapp-float" title="Fale no WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#fff"/></svg>
 </a>
 
 <script>
-  // Nav scroll
+  // Nav scroll — fica branca com sombra
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
   nav.classList.toggle('scrolled', window.scrollY > 60);
@@ -797,36 +850,36 @@
 
     function buildDots() {
       dotsEl.innerHTML = '';
-      for (let i = 0; i <= maxIdx(); i++) {
+      const n = maxIdx() + 1;
+      for (let i = 0; i < n; i++) {
         const d = document.createElement('button');
         d.className = 'rc-dot' + (i === current ? ' rc-dot--active' : '');
-        d.setAttribute('aria-label', 'Depoimento ' + (i + 1));
-        d.addEventListener('click', function() { current = i; update(); });
+        d.onclick = () => go(i);
         dotsEl.appendChild(d);
       }
     }
 
-    function update() {
-      current = Math.min(current, maxIdx());
-      const cardW = cards[0] ? cards[0].offsetWidth : 0;
-      const gap = parseFloat(window.getComputedStyle(track).gap) || 19.2;
-      track.style.transform = 'translateX(-' + (current * (cardW + gap)) + 'px)';
+    function go(idx) {
+      current = Math.max(0, Math.min(idx, maxIdx()));
+      const pv = perView();
+      const cardW = track.parentElement.offsetWidth / pv;
+      track.style.transform = 'translateX(-' + (current * (cardW + 19.2)) + 'px)';
+      buildDots();
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current >= maxIdx();
-      document.querySelectorAll('.rc-dot').forEach((d, i) => d.classList.toggle('rc-dot--active', i === current));
     }
 
-    prevBtn.addEventListener('click', function() { if (current > 0) { current--; update(); } });
-    nextBtn.addEventListener('click', function() { if (current < maxIdx()) { current++; update(); } });
+    cards.forEach(c => { c.style.flex = '0 0 calc((100% - ' + (perView() - 1) * 1.2 + 'rem) / ' + perView() + ')'; });
 
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function() { buildDots(); update(); }, 150);
+    prevBtn.onclick = () => go(current - 1);
+    nextBtn.onclick = () => go(current + 1);
+
+    window.addEventListener('resize', () => {
+      cards.forEach(c => { c.style.flex = '0 0 calc((100% - ' + (perView() - 1) * 1.2 + 'rem) / ' + perView() + ')'; });
+      go(Math.min(current, maxIdx()));
     });
 
-    buildDots();
-    update();
+    go(0);
   })();
 </script>
 </body>
