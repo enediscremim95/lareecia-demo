@@ -231,7 +231,7 @@
       .stat-item:not(:last-child)::after { display: none; }
       .benefits-grid { grid-template-columns: 1fr; }
       .testimonial-card { flex: 0 0 calc((100% - 1.2rem) / 2); }
-      .rc-btn { width: 32px; height: 32px; font-size: 1.2rem; }
+      .rc-btn { width: 36px; height: 36px; font-size: 1.3rem; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-img img { height: 300px; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
@@ -242,6 +242,10 @@
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; gap: .5rem; text-align: center; }
       .products-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .testimonial-card { flex: 0 0 100%; }
+      .rc-btn { width: 30px; height: 30px; font-size: 1.1rem; }
     }
   </style>
 </head>
@@ -786,34 +790,44 @@
     let current = 0;
 
     function perView() {
-      return window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+      if (window.innerWidth <= 480) return 1;
+      if (window.innerWidth <= 768) return 2;
+      return 3;
     }
 
     function maxIdx() { return Math.max(0, total - perView()); }
 
+    function buildDots() {
+      dotsEl.innerHTML = '';
+      for (let i = 0; i <= maxIdx(); i++) {
+        const d = document.createElement('button');
+        d.className = 'rc-dot' + (i === current ? ' rc-dot--active' : '');
+        d.setAttribute('aria-label', 'Depoimento ' + (i + 1));
+        d.addEventListener('click', function() { current = i; update(); });
+        dotsEl.appendChild(d);
+      }
+    }
+
     function update() {
-      const pv = perView();
-      const cardW = track.parentElement.offsetWidth;
-      const gap = 19.2;
-      const itemW = (cardW - gap * (pv - 1)) / pv;
       current = Math.min(current, maxIdx());
-      track.style.transform = 'translateX(-' + (current * (itemW + gap)) + 'px)';
+      const cardW = cards[0] ? cards[0].offsetWidth : 0;
+      const gap = parseFloat(window.getComputedStyle(track).gap) || 19.2;
+      track.style.transform = 'translateX(-' + (current * (cardW + gap)) + 'px)';
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current >= maxIdx();
       document.querySelectorAll('.rc-dot').forEach((d, i) => d.classList.toggle('rc-dot--active', i === current));
     }
 
-    // criar dots
-    for (let i = 0; i <= maxIdx(); i++) {
-      const d = document.createElement('button');
-      d.className = 'rc-dot' + (i === 0 ? ' rc-dot--active' : '');
-      d.addEventListener('click', function() { current = i; update(); });
-      dotsEl.appendChild(d);
-    }
-
     prevBtn.addEventListener('click', function() { if (current > 0) { current--; update(); } });
     nextBtn.addEventListener('click', function() { if (current < maxIdx()) { current++; update(); } });
-    window.addEventListener('resize', function() { update(); });
+
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() { buildDots(); update(); }, 150);
+    });
+
+    buildDots();
     update();
   })();
 </script>
